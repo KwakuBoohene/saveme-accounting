@@ -12,14 +12,16 @@ export default function Chart1(){
         xaxis: {
         categories: ['May', 'June', 'July', 'August']
         },
-       stroke:{
-           curve:'smooth'
-       },
+       
         colors:['#689C7E'],
         dataLabels:{
             enabled:false
         }
     })
+
+    const stroke = {
+        curve:'smooth'
+    }
 
     const [series,setSeries] = useState(
         [
@@ -48,6 +50,7 @@ export default function Chart1(){
                     </div>
                 </div>
                 <Chart
+                stroke={stroke}
               options={options}
               series={series}
               type="area"
