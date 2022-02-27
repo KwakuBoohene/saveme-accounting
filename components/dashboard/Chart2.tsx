@@ -1,4 +1,4 @@
-import Chart from "react-apexcharts";
+
 import { useState } from "react";
 import styles from '../../styles/general/component.module.scss';
 
@@ -31,11 +31,7 @@ export default function Chart2(){
                         <div className="font-bold">BOOK KEEPING STATISTICS</div>
                     </div>
                 </div>
-                <Chart
-              options={options}
-              series={series}
-              type="pie"
-            />
+
         </div>
     )
 }

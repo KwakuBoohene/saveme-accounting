@@ -1,4 +1,4 @@
-import Chart from "react-apexcharts";
+
 import { useState } from "react";
 import styles from '../../styles/general/component.module.scss';
 
@@ -49,12 +49,7 @@ export default function Chart1(){
                         </select>
                     </div>
                 </div>
-                <Chart
-                stroke={stroke}
-              options={options}
-              series={series}
-              type="area"
-            />
+
         </div>
     )
 }

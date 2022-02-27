@@ -1,4 +1,4 @@
-import Chart from "react-apexcharts";
+
 import { useState } from "react";
 
 
@@ -21,13 +21,7 @@ export default function Chart1(){
 
     return(
         <div className="">
-                <Chart
-              options={options}
-              series={series}
-              type="donut"
-              width={600}
-              height={250}
-            />
+
         </div>
     )
 }
