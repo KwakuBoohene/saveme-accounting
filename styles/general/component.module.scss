@@ -1,0 +1,84 @@
+// Chart Styling
+
+.chart_background{
+    @apply bg-white w-full rounded-lg
+    p-8 shadow-md;
+}
+
+.chart_heading{
+    @apply flex text-gray-500
+    justify-between w-full px-4 py-4;
+}
+
+.chart_select{
+    @apply focus:outline-none px-4
+    rounded-lg py-1 border border-gray-400
+    focus:border-green-primary
+}
+
+.header_body{
+    @apply w-full flex justify-between
+    py-5  bg-gray-extra-light
+}
+
+// Header Styling
+.header_search{
+    @apply focus:outline-none 
+    focus:text-gray-600 font-semibold
+    text-gray-400 placeholder-gray-400
+}
+
+.header_search_body{
+    @apply block bg-white py-2 px-5
+    w-96 rounded-2xl shadow-md
+}
+
+.logout_button{
+    @apply bg-red-600 hover:bg-red-800
+    transition-all duration-300
+    rounded-md text-xs py-2 px-3 text-white
+}
+
+// Table Styling
+.table_style{
+    @apply min-w-full divide-y
+     divide-gray-200 table-fixed
+      dark:divide-gray-700;
+}
+
+.table_header{
+    @apply py-3 px-6 text-xs
+     font-medium tracking-wider 
+    text-left text-gray-700 
+    uppercase dark:text-gray-400;
+}
+
+.table_row{
+    @apply hover:bg-gray-100
+     dark:hover:bg-gray-700
+}
+
+.table_cell_dark{
+    @apply py-4 px-6 text-sm
+     font-medium 
+    text-gray-900 whitespace-nowrap
+     dark:text-white
+}
+
+.table_cell_link{
+    @apply py-4 px-6 text-sm
+     font-medium text-right
+      whitespace-nowrap
+}
+
+.table_link{
+    @apply text-blue-600 dark:text-blue-500 hover:underline
+}
+
+
+.form_control{
+    @apply border w-full
+    text-xs rounded-md px-3 py-2 border-gray-200 placeholder-gray-400
+    focus:outline-none focus:border-green-secondary transition-all
+    duration-500
+}

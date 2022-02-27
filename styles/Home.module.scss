@@ -1,0 +1,58 @@
+
+
+.header{
+  @apply w-full bg-white;
+}
+
+.header_body{
+  @apply w-full flex justify-between px-8 py-4;
+}
+
+
+.header_menu{
+  @apply flex items-center;
+}
+
+.menu_option{
+  @apply text-green-primary font-light cursor-pointer
+   hover:text-green-secondary mx-3;
+}
+
+.header_rhs{
+  @apply mt-3;
+}
+
+.sign_in_button{
+  @apply text-white bg-green-primary border-green-primary
+  transition-all duration-300 hover:bg-green-secondary
+  hover:border-green-secondary;
+}
+
+.sign_up_button{
+  @apply text-green-primary border-green-primary
+  transition-all duration-300 
+  hover:bg-gray-100;
+}
+
+
+.headline{ 
+  @apply xl:px-24 py-20 grid grid-cols-12
+   gap-5 bg-green-light;
+}
+
+.headline_main{
+  @apply text-6xl font-semibold
+  leading-tight text-green-secondary
+}
+
+.headline_subtext{
+  @apply text-xl my-5 leading-tight font-light
+   text-gray-tertiary
+}
+
+.headline_button{
+  @apply border border-green-primary rounded-md text-white 
+  text-lg bg-green-primary px-6 py-3 font-light mx-2
+  transition-all duration-300 hover:border-green-secondary
+  hover:bg-green-secondary;
+}

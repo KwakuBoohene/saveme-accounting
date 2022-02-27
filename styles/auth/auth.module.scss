@@ -1,0 +1,31 @@
+.page_layout{
+    @apply min-h-screen relative;
+}
+
+.page_card{
+    @apply border border-green-primary
+    py-5 mt-11 px-32 w-6/12
+}
+
+.form_control{
+    @apply border w-full rounded-lg px-4 py-3 border-gray-200 placeholder-gray-400
+    focus:outline-none focus:border-green-secondary transition-all
+    duration-500
+}
+
+.auth_button{
+    @apply border border-green-primary rounded-md
+    text-green-primary hover:text-green-secondary
+    hover:border-green-secondary transition-all duration-500
+     font-bold px-3 py-1
+}
+
+.auth_link{
+    @apply mx-2 transition-all duration-300
+    text-green-primary hover:text-green-secondary
+}
+
+.auth_footer{
+    @apply w-full  bottom-0 absolute
+    py-20 bg-green-primary
+}
