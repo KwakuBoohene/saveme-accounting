@@ -41,7 +41,7 @@ export default function Savings(){
     return(
         <div className="container">
             <div className="w-full px-24">
-                <div className="grid grid-cols-12 gap-6">
+                <div className="between px-24">
                     <div className="col-span-4">
                     <Card
                         name='TOTAL AMOUNT IN ASSETS'

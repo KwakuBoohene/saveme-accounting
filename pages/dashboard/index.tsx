@@ -33,12 +33,12 @@ export default function Home (){
             </div>
 
             <div className="grid grid-cols-12 gap-4 px-6 text-xs my-6 pb-5">
-                <div className="col-span-6">
+                <div className="col-span-7">
                       <Chart1/>
                      
                 </div>
-
-                <div className="col-span-6">
+                <div className="col-span-1"></div>
+                <div className="col-span-4">
                     <Chart2/>
                 </div>
             </div>

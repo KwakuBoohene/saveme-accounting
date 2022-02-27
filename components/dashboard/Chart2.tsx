@@ -1,27 +1,34 @@
 
 import { useState } from "react";
 import styles from '../../styles/general/component.module.scss';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Doughnut } from 'react-chartjs-2';
+import config from '../../tailwind.config'
 
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function Chart2(){
 
-    const [options,setOptions] = useState({
-        chart: {
-            id: "Line Chart"
-        },
-        xaxis: {
-        categories: ['May', 'June', 'July']
-        },
-        colors:['#689C7E','#025928','#024C22C3'],
-        dataLabels:{
-            enabled:false
-        },
-        labels:['Label 1','Second Label','Third Label']
-    })
+    const [data, setData] = useState({
+        labels: ['Creditors', 'Debtors'],
+        datasets: [
+          {
+            responsive: true,
+            label: '# of People',
+            data: [12, 19],
+            backgroundColor: [
+              config.theme.extend.colors.green.primary,
+              config.theme.extend.colors.green.secondary
+            ],
+            borderColor: [
+                config.theme.extend.colors.green.primary,
+                config.theme.extend.colors.green.secondary
+            ],
+            borderWidth: 1,
+          },
+        ],
+      }) 
 
-    const [series,setSeries] = useState(
-        [630, 540, 345]
-    )
 
     return(
         <div className={styles.chart_background}>
@@ -31,7 +38,7 @@ export default function Chart2(){
                         <div className="font-bold">BOOK KEEPING STATISTICS</div>
                     </div>
                 </div>
-
+                <Doughnut data={data}  />
         </div>
     )
 }

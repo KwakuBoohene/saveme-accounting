@@ -1,36 +1,67 @@
-
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+  } from 'chart.js';
+  import { Line } from 'react-chartjs-2';
 import { useState } from "react";
+import config from '../../tailwind.config'
+
 import styles from '../../styles/general/component.module.scss';
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+  );
 
 
 export default function Chart1(){
 
+    const { faker } = require('@faker-js/faker');
+
     const [options,setOptions] = useState({
-        chart: {
-            id: "Line Chart"
-        },
-        xaxis: {
-        categories: ['May', 'June', 'July', 'August']
-        },
-       
-        colors:['#689C7E'],
-        dataLabels:{
-            enabled:false
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top' as const,
+          },
+          title: {
+            display: false,
+            text: 'Chart.js Line Chart',
+          }
         }
     })
+
+    const [labels,setLabels] = useState(['January', 'February', 
+    'March', 'April', 'May', 'June', 'July']);
 
     const stroke = {
         curve:'smooth'
     }
 
-    const [series,setSeries] = useState(
-        [
-            {
-              name: "Amount in Cedis",
-              data: [630, 540, 345, 450]
-            }
-          ]
-    )
+    
+
+    const data = {
+      labels,
+      datasets: [
+        {
+          label: 'Value of Asset in Cedis',
+          data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+          borderColor: config.theme.extend.colors.green.primary,
+          backgroundColor: config.theme.extend.colors.green.primary,
+        }
+      ],
+    };
 
     return(
         <div className={styles.chart_background}>
@@ -49,6 +80,8 @@ export default function Chart1(){
                         </select>
                     </div>
                 </div>
+
+                <Line options={options} data={data} />
 
         </div>
     )
