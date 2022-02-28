@@ -6,6 +6,202 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("HEROKU_POSTGRESQL_JADE_URL")
+}
+
+model User {
+  id              Int         @id @default(autoincrement())
+  fname           String?
+  lname           String
+  username        String      @unique
+  email           String      @unique
+  password        String
+  createdAt       DateTime    @default(now()) @map(name: "created_at")
+  updatedAt       DateTime    @updatedAt @map(name: "updated_at")
+  base_currencyId Int?
+  base_currency   Currency?   @relation(fields: [base_currencyId], references: [id])
+  wallets         Wallet[]
+  expenses        Expense[]
+  tags            Tag[]
+  incomes         Income[]
+  assets          Assets[]
+  asset_types     AssetType[]
+
+  debts              Debt[]
+  credits            Credit[]
+  expense_categories ExpenseCategory[]
+  income_sources     IncomeSource[]
+  @@map(name: "users")
+  WalletType WalletType[]
+}
+
+model Wallet {
+  id      Int        @id @default(autoincrement())
+  name    String
+  typeId  Int
+  type    WalletType @relation(fields: [typeId], references: [id])
+  balance Float
+
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model WalletType {
+  id     Int    @id @default(autoincrement())
+  name   String
+  userId Int?
+  user   User?  @relation(fields: [userId], references: [id])
+  Wallet Wallet[]
+}
+
+model Expense {
+  id          Int             @id @default(autoincrement())
+  name        String
+  description String?
+  amount      Float
+  date        DateTime?
+  currencyId  Int?
+  currency    Currency?       @relation(fields: [currencyId], references: [id])
+  createdAt   DateTime        @default(now()) @map(name: "created_at")
+  updatedAt   DateTime        @updatedAt @map(name: "updated_at")
+  userId      Int
+  category    ExpenseCategory @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+  user        User            @relation(fields: [userId], references: [id])
+  tags        ExpenseTag[]
+}
+
+model ExpenseCategory {
+  id        Int       @id @default(autoincrement())
+  name      String
+  userId    Int?
+  user      User?     @relation(fields: [userId], references: [id])
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+  updatedAt DateTime  @updatedAt @map(name: "updated_at")
+  expenses  Expense[]
+}
+
+model Income {
+  id          Int          @id @default(autoincrement())
+  name        String
+  description String?
+  amount      Float
+  date        DateTime?
+  currencyId  Int?
+  currency    Currency?    @relation(fields: [currencyId], references: [id])
+  createdAt   DateTime     @default(now()) @map(name: "created_at")
+  updatedAt   DateTime     @updatedAt @map(name: "updated_at")
+  userId      Int
+  source      IncomeSource @relation(fields: [sourceId], references: [id])
+  sourceId    Int
+  user        User         @relation(fields: [userId], references: [id])
+  tags        IncomeTag[]
+}
+
+model IncomeSource {
+  id        Int      @id @default(autoincrement())
+  name      String
+  userId    Int?
+  user      User?    @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+  incomes   Income[]
+}
+
+model Tag {
+  id       Int          @id @default(autoincrement())
+  name     String
+  userId   Int?
+  user     User?        @relation(fields: [userId], references: [id])
+  incomes  IncomeTag[]
+  expenses ExpenseTag[]
+}
+
+model IncomeTag {
+  tagId    Int
+  incomeId Int
+  tag      Tag    @relation(fields: [tagId], references: [id])
+  income   Income @relation(fields: [incomeId], references: [id])
+
+  @@unique([tagId, incomeId], name: "income_TagsId")
+}
+
+model ExpenseTag {
+  tagId     Int
+  expenseId Int
+  tag       Tag     @relation(fields: [tagId], references: [id])
+  expense   Expense @relation(fields: [expenseId], references: [id])
+
+  @@unique([tagId, expenseId], name: "expense_TagsId")
+}
+
+model Assets {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  amount      Float
+  typeId      Int
+  currencyId  Int?
+  currency    Currency? @relation(fields: [currencyId], references: [id])
+  type        AssetType @relation(fields: [typeId], references: [id])
+  createdAt   DateTime  @default(now()) @map(name: "created_at")
+  updatedAt   DateTime  @updatedAt @map(name: "updated_at")
+  userId      Int
+  user        User      @relation(fields: [userId], references: [id])
+}
+
+model AssetType {
+  id     Int      @id @default(autoincrement())
+  name   String
+  userId Int?
+  user   User?    @relation(fields: [userId], references: [id])
+  assets Assets[]
+}
+
+model Currency {
+  id      Int       @id @default(autoincrement())
+  name    String
+  rate    Float
+  code    String
+  symbol  String
+  User    User[]
+  Expense Expense[]
+  Income  Income[]
+  Assets  Assets[]
+  Debt    Debt[]
+  Credit  Credit[]
+}
+
+model Debt {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  amount      Float
+  date        DateTime?
+  date_paid   DateTime?
+  currencyId  Int?
+  currency    Currency? @relation(fields: [currencyId], references: [id])
+  createdAt   DateTime  @default(now()) @map(name: "created_at")
+  updatedAt   DateTime  @updatedAt @map(name: "updated_at")
+  userId      Int
+  user        User      @relation(fields: [userId], references: [id])
+}
+
+model Credit {
+  id            Int       @id @default(autoincrement())
+  name          String
+  description   String?
+  amount        Float
+  date          DateTime?
+  date_received DateTime?
+  currencyId    Int?
+  currency      Currency? @relation(fields: [currencyId], references: [id])
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
+  userId        Int
+  user          User      @relation(fields: [userId], references: [id])
 }

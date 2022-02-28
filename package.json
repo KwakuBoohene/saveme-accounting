@@ -1,6 +1,9 @@
 {
   "name": "saveme-next",
   "private": true,
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -8,9 +11,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@prisma/client": "^3.10.0",
     "apexcharts": "^3.33.1",
+    "bcryptjs": "^2.4.3",
     "chart.js": "^3.7.1",
     "next": "12.0.10",
+    "next-auth": "^4.2.1",
     "react": "17.0.2",
     "react-chartjs-2": "^4.0.1",
     "react-dom": "17.0.2",
@@ -18,7 +24,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^6.0.0-alpha.7",
-    "@types/node": "17.0.17",
+    "@types/node": "^17.0.17",
     "@types/react": "17.0.39",
     "autoprefixer": "^10.4.2",
     "eslint": "8.9.0",
@@ -26,7 +32,8 @@
     "postcss": "^8.4.6",
     "prisma": "^3.10.0",
     "tailwindcss": "^3.0.22",
-    "typescript": "4.5.5"
+    "ts-node": "^10.5.0",
+    "typescript": "^4.5.5"
   },
   "cacheDirectories": [
     ".next/cache"
