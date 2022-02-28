@@ -23,10 +23,15 @@ export default function SignIn(){
                 <div className="text-center text-xs">
                     Fill the Following to proceed
                 </div>
-                
+
+                <form action="" className="w-full">
                 <FormControl type='email' placeholder='Email'/>
 
-                <FormControl type='password' placeholder="Password"/>
+<FormControl type='password' placeholder="Password"/>
+
+                </form>
+                
+                
 
 
                 <div className="my-4 center">
