@@ -2,10 +2,67 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["mongoDb"]
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  fname      String
+  lname      String
+  email      String
+  password   String
+  username   String
+  dob        DateTime?
+  createdAt  DateTime? @default(now())
+  updatedAt  DateTime?
+  verifiedAt DateTime?
+  expenses   Expense[]
+  assets     Asset[]
+  income     Income[]
+}
+
+model Expense {
+  id                 String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId             String    @db.ObjectId
+  user               User      @relation(fields: [userId], references: [id])
+  expenseName        String
+  expenseAmount      Float
+  expenseDate        DateTime?
+  expenseCategory    String
+  expenseDescription String?
+  tags               String[]
+  createdAt          DateTime? @default(now())
+  updatedAt          DateTime?
+}
+
+model Asset {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String    @db.ObjectId
+  user       User      @relation(fields: [userId], references: [id])
+  assetName  String
+  assetType  String
+  assetValue Float
+  tags       String[]
+  createdAt  DateTime? @default(now())
+  updatedAt  DateTime?
+}
+
+model Income {
+  id                String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String    @db.ObjectId
+  user              User      @relation(fields: [userId], references: [id])
+  incomeName        String
+  incomeSource      String
+  incomeAmount      Float
+  incomeDate        DateTime?
+  incomeDescription String?
+  tags              String[]
+  createdAt         DateTime? @default(now())
+  updatedAt         DateTime?
 }

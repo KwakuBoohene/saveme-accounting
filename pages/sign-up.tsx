@@ -4,10 +4,24 @@ import Image from "next/image";
 import styles from "../styles/auth/auth.module.scss";
 import Layout from "../components/auth/Layout";
 import FormControl from '../components/auth/FormControl';
+import { useFormik } from "formik";
 
 export default function SignUp(){
+    const signUpForm = useFormik({
+        initialValues: {
+          fname: '',
+          lname: '',
+          email: '',
+          password: '',
+          repeatPassword: '',
+          username: ''
+        },
+        onSubmit: values => {
+          alert(JSON.stringify(values, null, 2));
+        },
+      });
     return(
-            <div className={styles.page_card + ' mb-48'}>
+            <form onSubmit={signUpForm.handleSubmit} className={styles.page_card + ' mb-48'}>
                 <div className="center py-6">
                     <Image
                     src='/assets/icons/icon-transparent.png'
@@ -17,12 +31,12 @@ export default function SignUp(){
                     />
                 </div>
 
-                <FormControl type='text' placeholder='First Name'/>
-                <FormControl type='text' placeholder='Last Name'/>
-                <FormControl type='text' placeholder='Username'/>    
-                <FormControl type='email' placeholder='Email'/>
-                <FormControl type='password' placeholder="Password"/>
-                <FormControl type='password' placeholder="Repeat Password"/>
+                <FormControl form={signUpForm} fieldName='fname' type='text' placeholder='First Name'/>
+                <FormControl form={signUpForm} fieldName='lname'  type='text' placeholder='Last Name'/>
+                <FormControl form={signUpForm} fieldName='username' type='text' placeholder='Username'/>    
+                <FormControl form={signUpForm} fieldName='email' type='email' placeholder='Email'/>
+                <FormControl form={signUpForm} fieldName='password' type='password' placeholder="Password"/>
+                <FormControl form={signUpForm} fieldName='repeatPassword' type='password' placeholder="Repeat Password"/>
 
 
                 <div className="my-4 center">
@@ -44,7 +58,7 @@ export default function SignUp(){
                 </div>
 
            
-            </div>
+            </form>
 
     )
 }

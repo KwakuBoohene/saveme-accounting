@@ -2,11 +2,15 @@
 import styles from "../../styles/auth/auth.module.scss";
 
 export default function FormControl(
-    props:any){
-    return(
+    { form, fieldName,type, placeholder }:any) {
+    return (
         <div className="my-10">
-            <input type={props.type} placeholder={props.placeholder}
-            className={styles.form_control} />
+            <input name={fieldName}
+                type={type}
+                onChange={form.handleChange}
+                value={form.values[fieldName]}
+                placeholder={placeholder}
+                className={styles.form_control} />
         </div>
     )
 }
