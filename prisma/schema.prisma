@@ -12,19 +12,23 @@ datasource db {
 }
 
 model User {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  fname      String
-  lname      String
-  email      String
-  password   String
-  username   String
-  dob        DateTime?
-  createdAt  DateTime? @default(now())
-  updatedAt  DateTime?
-  verifiedAt DateTime?
-  expenses   Expense[]
-  assets     Asset[]
-  income     Income[]
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  fname         String
+  lname         String
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String
+  username      String
+  dob           DateTime?
+  createdAt     DateTime? @default(now())
+  updatedAt     DateTime?
+  verifiedAt    DateTime?
+  accounts      Account[]
+  sessions      Session[]
+  expenses      Expense[]
+  assets        Asset[]
+  income        Income[]
 }
 
 model Expense {
@@ -65,4 +69,31 @@ model Income {
   tags              String[]
   createdAt         DateTime? @default(now())
   updatedAt         DateTime?
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

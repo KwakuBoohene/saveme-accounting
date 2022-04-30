@@ -4,7 +4,7 @@
 
 .page_card{
     @apply border border-green-primary
-    py-5 mt-11 px-32 w-6/12
+    py-5 mt-11 lg:px-32 px-16 lg:w-6/12 w-9/12
 }
 
 .form_control{

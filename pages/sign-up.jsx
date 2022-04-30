@@ -8,8 +8,12 @@ import * as Yup from "yup";
 import { Button, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import axios from "axios";
+import { getSession, signIn } from "next-auth/react";
+import { useRouter } from "next/router";
+
 
 export default function SignUp() {
+  const router = useRouter()
   const toast = useToast();
   const validationSchema = Yup.object({
     fname: Yup.string().required("First Name is required"),
@@ -33,10 +37,10 @@ export default function SignUp() {
       username: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       setIsLoading(true);
       axios
-        .post("/api/auth/signup", values)
+        .post("/api/register/signup", values)
         .then((res) => {
           console.log(res);
           toast({
@@ -46,6 +50,14 @@ export default function SignUp() {
             duration: 9000,
             isClosable: true,
           });
+          signIn("credentials", {
+            callbackUrl: "/dashboard",
+            username: values.email,
+            password: values.password,
+          }).then((res) => {
+            router.push('/dashboard')
+          });
+          resetForm();
         })
         .catch((err) => {
           console.log(err);
@@ -70,12 +82,16 @@ export default function SignUp() {
       className={styles.page_card + " mb-48"}
     >
       <div className="center py-6">
-        <Image
-          src="/assets/icons/icon-transparent.png"
-          width={100}
-          height={100}
-          alt="Icon Image"
-        />
+        <a className="cursor-pointer">
+          <Link href={"/"}>
+            <Image
+              src="/assets/icons/icon-transparent.png"
+              width={100}
+              height={100}
+              alt="Icon Image"
+            />
+          </Link>
+        </a>
       </div>
 
       <FormControl
@@ -116,11 +132,7 @@ export default function SignUp() {
       />
 
       <div className="my-4 center">
-        <Button
-          isLoading={isLoading}
-          type="submit"
-          className={styles.auth_button}
-        >
+        <Button isLoading={isLoading} type="submit" colorScheme={"green"}>
           Sign Up
         </Button>
       </div>
@@ -135,5 +147,20 @@ export default function SignUp() {
       </div>
     </form>
   );
+}
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  if (session) {
+    return {
+      redirect: {
+        destination: "/dashboard",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
 }
 SignUp.getLayout = Layout;
