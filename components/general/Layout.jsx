@@ -11,7 +11,7 @@ function Layout({ children }) {
         </title>
         <link rel="icon" href="./assets/icons/icon-transparent.png" />
       </Head>
-      <div className="flex min-h-screen h-full">
+      <div className="flex relative min-h-screen h-full">
         <Sidebar />
 
         <div
