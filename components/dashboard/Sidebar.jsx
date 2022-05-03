@@ -4,7 +4,7 @@ import useStore from "../../store/store";
 import SidebarItem from "./SidebarItem";
 import { sidebarmenu } from "./sidebar_menu";
 import { Button } from "@chakra-ui/react";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 
 export default function Sidebar() {
@@ -70,6 +70,8 @@ export default function Sidebar() {
 }
 
 const Menu = () => {
+  const { data: session, status } = useSession();
+
   return (
     <>
       <div className="center">
@@ -79,8 +81,21 @@ const Menu = () => {
           alt=""
         />
       </div>
+      {session && (
+        <>
+          <div className="text-center mt-10 text-white">
+            <p className="">
+              <span className="mx-2">
+                <i class="fa-solid fa-user"></i>
+              </span>
+              {session.user.email}{" "}
+            </p>
+          </div>
+        </>
+      )}
+      <div className=""></div>
 
-      <div className="mt-10">
+      <div className="mt-3">
         {sidebarmenu.map((item, index) => {
           return (
             <SidebarItem

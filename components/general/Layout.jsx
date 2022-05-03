@@ -2,7 +2,7 @@ import Sidebar from "../dashboard/Sidebar";
 import Header from "./Header";
 import Head from "next/head";
 
-function Layout({ children }) {
+function Layout(children) {
   return (
     <div className="">
       <Head>
@@ -16,9 +16,10 @@ function Layout({ children }) {
 
         <div
           className="px-6 min-h-screen w-full
-              bg-gray-extra-light"
+              bg-gray-extra-light "
         >
           <Header />
+
           {children}
         </div>
       </div>

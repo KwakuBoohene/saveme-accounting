@@ -16,7 +16,11 @@ export default function MyApp({
         <title>
           SaveMe - A Personal Accounting App for your everyday internet user
         </title>
-        <link rel="icon" href="./assets/icons/icon-transparent.png" />
+        <link rel="icon" href="/assets/icons/icon-transparent.png" />
+        <script
+          src="https://kit.fontawesome.com/2510de3e0b.js"
+          crossorigin="anonymous"
+        ></script>
       </Head>
       <ChakraProvider>{getLayout(<Component {...pageProps} />)}</ChakraProvider>
     </SessionProvider>
