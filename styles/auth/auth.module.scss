@@ -1,14 +1,14 @@
 .page_layout{
-    @apply min-h-screen relative;
+    @apply min-h-screen relative bg-green-primary/20;
 }
 
 .page_card{
-    @apply border border-green-primary
-    py-5 mt-11 lg:px-32 md:px-16 px-6 lg:w-6/12 md:w-9/12 w-11/12
+    @apply border bg-white rounded-lg
+    py-5 mt-11 lg:px-8 md:px-16 px-6 lg:w-[450px] md:w-9/12 w-11/12
 }
 
 .form_control{
-    @apply border w-full rounded-lg px-4 py-3 border-gray-200 placeholder-gray-400
+    @apply border w-full rounded px-4 py-2 border-gray-400 placeholder-gray-400
     focus:outline-none focus:border-green-secondary transition-all
     duration-500
 }

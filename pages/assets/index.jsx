@@ -38,9 +38,9 @@ const assets = [
 export default function Savings() {
   return (
     <div className="container">
-      <div className="w-full px-24">
-        <div className="between px-24">
-          <div className="col-span-4">
+      <div className="w-full px-10">
+        <div className="between grid grid-cols-12">
+          <div className="lg:col-span-4 col-span-12">
             <Card
               name="TOTAL AMOUNT IN ASSETS"
               amount="429,000.00"
@@ -63,14 +63,18 @@ export default function Savings() {
             </div>
           </div>
 
-          <div className="col-span-8">
-            <Chart1 />
+          <div className="lg:col-span-8 col-span-12">
+            <div className="w-full h-full flex justify-end">
+              <div className="h-72">
+                <Chart1 />
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="my-5">
+        {/* <div className="my-5">
           <Table data={assets} />
-        </div>
+        </div> */}
       </div>
     </div>
   );

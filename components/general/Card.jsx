@@ -2,15 +2,10 @@ import Image from "next/image";
 
 export default function Card(props) {
   return (
-    <div className="px-6 py-4 rounded-lg bg-white w-64 shadow-lg shadow-gray-200">
-      <div className="text-gray-400 my-2">{props.name}</div>
-
-      <div className="text-gray-700 text-3xl font-semibold my-2">
-        $ {props.amount}
-      </div>
-
-      <div className="">
-        <span className="">
+    <div className="px-4 py-2 rounded-lg bg-white w-full shadow-lg shadow-gray-200">
+      <div className="text-gray-400 text sm font-bold mt-2">
+        {props.name}
+        <span className="pl-3">
           <Image
             src={
               props.upwards
@@ -27,17 +22,13 @@ export default function Card(props) {
         ) : null}
       </div>
 
-      {props.link ? (
-        <div
-          className="
-                    cursor-pointer font-bold
-                    text-green-primary
-                    hover:text-green-secondary transition-all 
-                    duration-500"
-        >
-          {props.link_text ? props.link_text : "View Statement"}
-        </div>
-      ) : null}
+      <div className="text-gray-900 text-lg font-semibold mb-2">
+        $ {props.amount}
+      </div>
+
+      <div
+        className={`my-2 h-1 ${props.bar_color || "bg-green-400"} rounded-xl`}
+      ></div>
     </div>
   );
 }

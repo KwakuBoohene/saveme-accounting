@@ -16,7 +16,7 @@ function Layout(children) {
 
         <div
           className="px-6 min-h-screen w-full
-              bg-gray-extra-light "
+          bg-green-primary/10  "
         >
           <Header />
 

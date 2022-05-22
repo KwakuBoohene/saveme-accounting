@@ -24,14 +24,14 @@ export default function Sidebar() {
 
   return (
     <>
-      <div className="w-96  min-h-screen bg-green-primary py-4 lg:block hidden">
+      <div className="w-96  min-h-screen bg-green-primary/10 lg:block hidden">
         <Menu />
       </div>
 
       {show_sidebar && (
         <div className="animate-fade-in-point-5 lg:hidden h-full absolute z-50 w-screen bg-gray-500 bg-opacity-30">
           <div className="w-full h-full flex justify-between">
-            <div className="w-56 min-h-full bg-green-primary opacity-100">
+            <div className="w-[250px] min-h-full bg-gray-800 opacity-100">
               <Menu />
               <div className="w-full flex justify-center">
                 <Button
@@ -74,19 +74,19 @@ const Menu = () => {
 
   return (
     <>
-      <div className="center">
+      <div className="center mt-10">
         <img
-          src="/assets/images/profile-picture.jpg"
-          className="w-32 h-32 rounded-full object-top"
+          src="/assets/icons/icon-transparent.png"
+          className="h-16 w-auto"
           alt=""
         />
       </div>
       {session && (
         <>
-          <div className="text-center mt-10 text-white">
+          <div className="text-center mt-10 lg:text-gray-600 text-white">
             <p className="">
               <span className="mx-2">
-                <i class="fa-solid fa-user"></i>
+                <i className="fa-solid fa-user"></i>
               </span>
               {session.user.email}{" "}
             </p>

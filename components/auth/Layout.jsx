@@ -14,8 +14,6 @@ function Layout(children) {
       <div className="container">
         <div className="center">{children}</div>
       </div>
-
-      <div className={styles.auth_footer}></div>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import styles from "../../styles/auth/auth.module.scss";
 
 export default function FormControl({ form, fieldName, type, placeholder }) {
   return (
-    <div className="my-10">
+    <div className="my-8">
       <div className="">
         <input
           name={fieldName}

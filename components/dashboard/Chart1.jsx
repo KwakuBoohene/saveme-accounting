@@ -10,7 +10,8 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { useState } from "react";
-import config from "../../tailwind.config";
+import resolveConfig from "tailwindcss/resolveConfig";
+import tailwindConfig from "../../tailwind.config";
 
 import styles from "../../styles/general/component.module.scss";
 
@@ -23,6 +24,8 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+
+const config = resolveConfig(tailwindConfig);
 
 export default function Chart1() {
   const { faker } = require("@faker-js/faker");
@@ -60,8 +63,8 @@ export default function Chart1() {
       {
         label: "Value of Asset in Cedis",
         data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-        borderColor: config.theme.extend.colors.green.primary,
-        backgroundColor: config.theme.extend.colors.green.primary,
+        borderColor: config.theme.colors.blue["500"],
+        backgroundColor: config.theme.colors.green.primary,
       },
     ],
   };

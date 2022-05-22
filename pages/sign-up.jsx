@@ -11,9 +11,8 @@ import axios from "axios";
 import { getSession, signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 
-
 export default function SignUp() {
-  const router = useRouter()
+  const router = useRouter();
   const toast = useToast();
   const validationSchema = Yup.object({
     fname: Yup.string().required("First Name is required"),
@@ -55,7 +54,7 @@ export default function SignUp() {
             username: values.email,
             password: values.password,
           }).then((res) => {
-            router.push('/dashboard')
+            router.push("/dashboard");
           });
           resetForm();
         })
@@ -93,6 +92,9 @@ export default function SignUp() {
           </Link>
         </a>
       </div>
+
+      <div className="text-lg font-bold">Start your saving journey here!</div>
+      <div className="text-sm">Fill the Following to proceed</div>
 
       <FormControl
         form={signUpForm}
@@ -132,7 +134,12 @@ export default function SignUp() {
       />
 
       <div className="my-4 center">
-        <Button isLoading={isLoading} type="submit" colorScheme={"green"}>
+        <Button
+          isLoading={isLoading}
+          type="submit"
+          isFullWidth={true}
+          colorScheme={"green"}
+        >
           Sign Up
         </Button>
       </div>

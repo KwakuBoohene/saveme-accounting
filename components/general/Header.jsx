@@ -27,7 +27,7 @@ export default function Header() {
         <div className="mx-3 mt-1 lg:hidden">
           <span onClick={() => toggleShowSidebar()} className="cursor-pointer">
             <svg
-              className="w-6 h-auto"
+              className="w-4 h-auto"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 448 512"
             >
@@ -35,14 +35,7 @@ export default function Header() {
             </svg>
           </span>
         </div>
-        <div className="mx-3">
-          <Image
-            src="/assets/icons/logo.svg"
-            alt="Logo"
-            width={40}
-            height={40}
-          />
-        </div>
+
         <div className={styles.header_search_body}>
           <div className="between">
             <input

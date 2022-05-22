@@ -41,7 +41,7 @@ export default function Chart1() {
   });
 
   return (
-    <div className="w-full">
+    <div className="w-full h-full">
       <Doughnut data={data} options={options} />
     </div>
   );

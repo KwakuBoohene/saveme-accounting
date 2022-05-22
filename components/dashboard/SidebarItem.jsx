@@ -9,8 +9,8 @@ export default function SidebarItem(props) {
 
   const makeRouteSelected = (text) => {
     return router.pathname.includes(text.toLowerCase())
-      ? " font-bold"
-      : " font-normal";
+      ? " font-bold  bg-green-primary"
+      : " font-normal lg:text-gray-600";
   };
 
   const changeRoute = (path) => {
@@ -20,25 +20,28 @@ export default function SidebarItem(props) {
   return (
     <div
       onClick={() => changeRoute(props.url)}
-      className="w-full flex py-3 lg:pl-20 pl-10 hover:bg-green-third
-            hover:cursor-pointer transition-all duration-300"
+      className={
+        `w-full flex py-3 lg:pl-20 pl-10 hover:scale-110 text-white 
+            hover:cursor-pointer transition-all duration-300 ` +
+        makeRouteSelected(props.name)
+      }
     >
-      <div className="">
-        <Image
-          src={props.icon_src}
-          alt={props.icon_alt || "Dashboard Icon"}
-          width={20}
-          height={20}
-        />
-      </div>
+      <div className={"flex"}>
+        <div className="">
+          <Image
+            src={props.icon_src}
+            alt={props.icon_alt || "Dashboard Icon"}
+            width={20}
+            height={20}
+          />
+        </div>
 
-      <div
-        className={
-          `pl-6
-                 text-md text-white` + makeRouteSelected(props.name)
-        }
-      >
-        {props.name}
+        <div
+          className={`pl-6
+                 text-md`}
+        >
+          {props.name}
+        </div>
       </div>
     </div>
   );

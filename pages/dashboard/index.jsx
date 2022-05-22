@@ -7,35 +7,45 @@ import Chart2 from "../../components/dashboard/Chart2";
 export default function Home() {
   return (
     <div className="container">
-      <div className="flex w-full justify-between my-6 px-24">
+      <div className="grid lg:grid-cols-4 md:grid-cols-2 md:gap-10 gap-5">
         <Card
-          name="TOTAL AMOUNT IN ASSETS"
+          name="ASSETS"
           amount="429,000.00"
           upwards={true}
           percentage="30"
           link="/reports/all-assets"
+          bar_color="bg-blue-400"
         />
         <Card
-          name="TOTAL EXPENSES"
+          name="EXPENSES"
           amount="400.00"
           upwards={false}
           percentage="20"
           link="/reports/all-expenses"
+          bar_color="bg-purple-400"
         />
         <Card
-          name="TOTAL INCOME"
+          name="INCOME"
+          amount="1,400.00"
+          upwards={true}
+          percentage="30"
+          link="/reports/all-income"
+          bar_color="bg-indigo-400"
+        />
+        <Card
+          name="INCOME"
           amount="1,400.00"
           upwards={true}
           percentage="30"
           link="/reports/all-income"
         />
       </div>
-      <div className="grid grid-cols-12 gap-4 px-6 text-xs my-6 pb-5">
-        <div className="col-span-7">
+      <div className="grid grid-cols-12 gap-4  text-xs my-6 pb-5">
+        <div className="md:col-span-7 col-span-12">
           <Chart1 />
         </div>
-        <div className="col-span-1"></div>
-        <div className="col-span-4">
+
+        <div className="md:col-span-5 col-span-12">
           <Chart2 />
         </div>
       </div>

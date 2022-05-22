@@ -34,14 +34,14 @@ export default function SignIn() {
         password: values.password,
       })
         .then((res) => {
-          if(!res.error)router.push("/dashboard");
+          if (!res.error) router.push("/dashboard");
           toast({
-            title: res.error ? 'Error' : "Success",
+            title: res.error ? "Error" : "Success",
             description: res.error ? res.error : "You are now signed in",
             status: res.error ? "error" : "success",
             duration: 5000,
             isClosable: true,
-          })
+          });
         })
         .catch((error) => {
           toast({
@@ -72,8 +72,8 @@ export default function SignIn() {
         </a>
       </div>
 
-      <div className="text-center text-lg">Continue Saving</div>
-      <div className="text-center text-xs">Fill the Following to proceed</div>
+      <div className="text-lg font-bold">Continue Saving</div>
+      <div className="text-sm">Fill the Following to proceed</div>
 
       <FormControl
         form={signInForm}
@@ -90,7 +90,12 @@ export default function SignIn() {
       />
 
       <div className="my-4 center">
-        <Button type="submit" isLoading={isLoading} colorScheme={"green"}>
+        <Button
+          type="submit"
+          isLoading={isLoading}
+          isFullWidth={true}
+          colorScheme={"green"}
+        >
           Sign In
         </Button>
       </div>
