@@ -1,25 +1,27 @@
 import MonoConnect from "@mono.co/connect.js";
 import { Button } from "@chakra-ui/react";
-import { useMemo } from "react";
+import { useState, useCallback } from "react";
 
 function ConnectToMono() {
-  const PUBLIC_KEY = process.env.NEXT_PUBLIC_MONO_LIVE_PK || "SDFASDF";
-  const monoConnect = useMemo(() => {
+  const [scriptLoaded, setScriptLoaded] = useState(false);
+
+  const openMonoWidget = useCallback(async () => {
+    const MonoConnect = (await import("@mono.co/connect.js")).default;
+
     const monoInstance = new MonoConnect({
+      key: "PUBLIC_KEY",
       onClose: () => console.log("Widget closed"),
-      onLoad: () => console.log("Widget loaded successfully"),
+      onLoad: () => setScriptLoaded(true),
       onSuccess: ({ code }) => console.log(`Linked successfully: ${code}`),
-      key: PUBLIC_KEY,
     });
 
     monoInstance.setup();
-
-    return monoInstance;
+    monoInstance.open();
   }, []);
   return (
     <Button
       onClick={() => {
-        monoConnect.open();
+        openMonoWidget();
       }}
       colorScheme={"green"}
     >

@@ -2,6 +2,7 @@ import "../styles/globals.scss";
 import { ChakraProvider } from "@chakra-ui/react";
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
+import Script from "next/script";
 
 export default function MyApp({
   Component,
@@ -17,11 +18,11 @@ export default function MyApp({
           SaveMe - A Personal Accounting App for your everyday internet user
         </title>
         <link rel="icon" href="/assets/icons/icon-transparent.png" />
-        <script
-          src="https://kit.fontawesome.com/2510de3e0b.js"
-          crossorigin="anonymous"
-        ></script>
       </Head>
+      <Script
+        src="https://kit.fontawesome.com/2510de3e0b.js"
+        crossOrigin="anonymous"
+      ></Script>
       <ChakraProvider>{getLayout(<Component {...pageProps} />)}</ChakraProvider>
     </SessionProvider>
   );
