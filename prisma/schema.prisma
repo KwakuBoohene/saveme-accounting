@@ -12,43 +12,61 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  fname         String
-  lname         String
-  email         String    @unique
-  emailVerified DateTime?
-  image         String?
-  password      String
-  username      String
-  dob           DateTime?
-  createdAt     DateTime? @default(now())
-  updatedAt     DateTime?
-  verifiedAt    DateTime?
-  accounts      Account[]
-  sessions      Session[]
-  expenses      Expense[]
-  assets        Asset[]
-  income        Income[]
+  id                 String               @id @default(auto()) @map("_id") @db.ObjectId
+  fname              String
+  lname              String
+  email              String               @unique
+  emailVerified      DateTime?
+  image              String?
+  password           String
+  username           String
+  dob                DateTime?
+  createdAt          DateTime?            @default(now())
+  updatedAt          DateTime?
+  verifiedAt         DateTime?
+  accounts           Account[]
+  sessions           Session[]
+  expenses           Expense[]
+  assets             Asset[]
+  income             Income[]
+  TransactionAccount TransactionAccount[]
 }
 
 model Expense {
-  id                 String    @id @default(auto()) @map("_id") @db.ObjectId
-  userId             String    @db.ObjectId
-  user               User      @relation(fields: [userId], references: [id])
+  id                 String             @id @default(auto()) @map("_id") @db.ObjectId
+  accountId          String
+  account            TransactionAccount @relation(fields: [accountId], references: [id])
   expenseName        String
   expenseAmount      Float
   expenseDate        DateTime?
   expenseCategory    String
   expenseDescription String?
   tags               String[]
+  createdAt          DateTime?          @default(now())
+  updatedAt          DateTime?
+  user               User?              @relation(fields: [userId], references: [id])
+  userId             String?            @db.ObjectId
+}
+
+model TransactionAccount {
+  id                 String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId             String    @db.ObjectId
+  user               User      @relation(fields: [userId], references: [id])
+  accountName        String
+  accountNumber      String
+  accountType        String
+  monoAccountId      String?
+  accountDescription String?
   createdAt          DateTime? @default(now())
   updatedAt          DateTime?
+  Expense            Expense[]
+  Income             Income[]
 }
 
 model Asset {
   id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  userId     String    @db.ObjectId
-  user       User      @relation(fields: [userId], references: [id])
+  userId     String?   @db.ObjectId
+  user       User?     @relation(fields: [userId], references: [id])
   assetName  String
   assetType  String
   assetValue Float
@@ -58,16 +76,18 @@ model Asset {
 }
 
 model Income {
-  id                String    @id @default(auto()) @map("_id") @db.ObjectId
-  userId            String    @db.ObjectId
-  user              User      @relation(fields: [userId], references: [id])
+  id                String              @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String              @db.ObjectId
+  user              User                @relation(fields: [userId], references: [id])
+  accountId         String
+  account           TransactionAccount? @relation(fields: [accountId], references: [id])
   incomeName        String
   incomeSource      String
   incomeAmount      Float
   incomeDate        DateTime?
   incomeDescription String?
   tags              String[]
-  createdAt         DateTime? @default(now())
+  createdAt         DateTime?           @default(now())
   updatedAt         DateTime?
 }
 

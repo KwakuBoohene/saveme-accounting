@@ -7,6 +7,7 @@ export default NextAuth({
   // Configure one or more authentication providers
   session: {
     jwt: true,
+    maxAge: 24 * 60 * 60,
   },
   providers: [
     CredentialsProvider({
@@ -48,7 +49,7 @@ export default NextAuth({
               throw Error("Password does not match");
             }
             //Else send success response
-            console.log(user);
+
             prisma.$disconnect();
             return user;
           } else {

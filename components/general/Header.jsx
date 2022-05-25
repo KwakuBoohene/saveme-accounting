@@ -3,13 +3,17 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "../../styles/general/component.module.scss";
 import { Button } from "@chakra-ui/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useStore from "../../store/store";
+import axios from "axios";
 
 export default function Header() {
   const [isLoading, setIsLoading] = useState(false);
   const { data: session, status } = useSession();
   const toggleShowSidebar = useStore((state) => state.toggleShowSidebar);
+  const email = useStore((state) => state.email);
+  const [accounts, setAccounts] = useState([]);
+
   const handleSignOut = async () => {
     setIsLoading(true);
     try {
@@ -20,6 +24,21 @@ export default function Header() {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    axios
+      .get(
+        process.env.NEXT_PUBLIC_BASE_URL +
+          "/api/accounts?email=" +
+          session.user.email
+      )
+      .then((res) => {
+        setAccounts(res.data.accounts);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div className={styles.header_body}>
@@ -43,7 +62,6 @@ export default function Header() {
               placeholder="Search"
               className={styles.header_search}
             />
-
             <button className="cursor-pointer">
               <Image
                 src="/assets/icons/search-icon.svg"
@@ -54,6 +72,27 @@ export default function Header() {
             </button>
           </div>
         </div>
+      </div>
+
+      <div className="text-sm">
+        Pull Transactions From Mono Account
+        <select
+          name=""
+          id=""
+          className="border-2 mx-2 px-2 py-1 rounded bg-transparent"
+        >
+          <option value="">Select An Account</option>
+          {accounts.map((account) => {
+            return (
+              <option key={account.id} value={account.accountNumber}>
+                {account.accountName}
+              </option>
+            );
+          })}
+        </select>
+        <Button mx={2} colorScheme={"blackAlpha"} size={"xs"}>
+          Confirm
+        </Button>
       </div>
 
       <div className="lg:flex hidden justify-between mb-4">

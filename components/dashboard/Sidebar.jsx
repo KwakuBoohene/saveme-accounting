@@ -5,7 +5,7 @@ import SidebarItem from "./SidebarItem";
 import { sidebarmenu } from "./sidebar_menu";
 import { Button } from "@chakra-ui/react";
 import { signOut, useSession } from "next-auth/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Sidebar() {
   const [isLoading, setIsLoading] = useState(false);
@@ -71,6 +71,13 @@ export default function Sidebar() {
 
 const Menu = () => {
   const { data: session, status } = useSession();
+  const setEmail = useStore((state) => state.setEmail);
+  const email = useStore((state) => state.email);
+  useEffect(() => {
+    if (email === "" && session?.user?.email) {
+      setEmail(session?.user?.email);
+    }
+  }, []);
 
   return (
     <>

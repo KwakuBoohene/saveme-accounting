@@ -24,10 +24,10 @@ export const sidebarmenu = [
     url: "income",
   },
   {
-    name: "Book Keeping",
+    name: "Accounts",
     icon_src: "book-keeping-icon.svg",
     icon_alt: "Bookkeeping Icon",
-    url: "book-keeping",
+    url: "accounts",
   },
   {
     name: "Help",
