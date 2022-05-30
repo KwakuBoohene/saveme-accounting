@@ -31,6 +31,15 @@ a {
   @apply border rounded-md px-4 py-1 font-light mx-2;
 }
 
+.hide_scrollbar{
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;
+}
+
+.hide_scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 .container {
 
   margin-right: auto;

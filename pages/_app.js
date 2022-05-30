@@ -3,6 +3,10 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
 import Script from "next/script";
+import { extendTheme } from "@chakra-ui/react";
+
+const boxShadow = "0px 0px 0px rgba(0, 0, 0, 0.1)";
+const theme = extendTheme({ boxShadow });
 
 export default function MyApp({
   Component,
@@ -23,7 +27,9 @@ export default function MyApp({
         src="https://kit.fontawesome.com/2510de3e0b.js"
         crossOrigin="anonymous"
       ></Script>
-      <ChakraProvider>{getLayout(<Component {...pageProps} />)}</ChakraProvider>
+      <ChakraProvider theme={theme}>
+        {getLayout(<Component {...pageProps} />)}
+      </ChakraProvider>
     </SessionProvider>
   );
 }

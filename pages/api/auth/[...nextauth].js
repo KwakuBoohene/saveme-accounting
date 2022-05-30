@@ -42,7 +42,7 @@ export default NextAuth({
               credentials.password,
               user.password
             );
-            console.log(checkPassword);
+
             //Incorrect password - send response
             if (!checkPassword) {
               prisma.$disconnect();

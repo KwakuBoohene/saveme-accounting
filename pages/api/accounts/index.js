@@ -30,12 +30,10 @@ const handleRequest = async (req, res) => {
     }
     if (req.method === "GET") {
       const { email } = req.query;
-      console.log("original email", email);
+
       const session = await axios.get(
         process.env.NEXTAUTH_URL + "/api/auth/session"
       );
-      console.log(session.status);
-      console.log(session.data);
       const accounts = await prisma.transactionAccount.findMany({
         where: {
           user: {

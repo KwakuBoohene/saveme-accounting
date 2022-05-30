@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import axios from "axios";
 import { useRouter } from "next/router";
 
-function ConnectToMono() {
+function ConnectToMono(props) {
   const [scriptLoaded, setScriptLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const setMonoCode = useStore((state) => state.setMonoCode);
@@ -40,7 +40,7 @@ function ConnectToMono() {
                 isClosable: true,
               });
             }
-            router.reload();
+            props.callbackFxn();
           })
 
           .catch((err) => {

@@ -26,18 +26,20 @@ export default function Header() {
   };
 
   useEffect(() => {
-    axios
-      .get(
-        process.env.NEXT_PUBLIC_BASE_URL +
-          "/api/accounts?email=" +
-          session.user.email
-      )
-      .then((res) => {
-        setAccounts(res.data.accounts);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    session
+      ? axios
+          .get(
+            process.env.NEXT_PUBLIC_BASE_URL +
+              "/api/accounts?email=" +
+              session.user.email
+          )
+          .then((res) => {
+            setAccounts(res.data.accounts);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      : null;
   }, []);
 
   return (
@@ -55,7 +57,7 @@ export default function Header() {
           </span>
         </div>
 
-        <div className={styles.header_search_body}>
+        <div className={styles.header_search_body + " lg:block"}>
           <div className="between">
             <input
               type="text"

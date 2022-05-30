@@ -41,7 +41,6 @@ export default function SignUp() {
       axios
         .post("/api/register/signup", values)
         .then((res) => {
-          console.log(res);
           toast({
             title: "Success",
             description: "You have successfully signed up",

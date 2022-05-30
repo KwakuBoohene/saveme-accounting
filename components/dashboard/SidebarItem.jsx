@@ -22,7 +22,7 @@ export default function SidebarItem(props) {
       onClick={() => changeRoute(props.url)}
       className={
         `w-full flex py-3 lg:pl-20 pl-10 hover:scale-110 text-white 
-            hover:cursor-pointer transition-all duration-300 ` +
+            cursor-pointer transition-all duration-300 ` +
         makeRouteSelected(props.name)
       }
     >

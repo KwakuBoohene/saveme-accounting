@@ -1,5 +1,4 @@
 import prisma from "../../../lib/prisma";
-const jwt = require("jsonwebtoken");
 import axios from "axios";
 
 const createMonoAccount = async (req, res) => {

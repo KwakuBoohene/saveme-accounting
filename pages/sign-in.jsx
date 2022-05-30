@@ -34,7 +34,6 @@ export default function SignIn() {
         password: values.password,
       })
         .then((res) => {
-          console.log(res);
           if (!res.error) router.push("/dashboard");
           toast({
             title: res.error ? "Error" : "Success",
